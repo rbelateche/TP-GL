@@ -5,18 +5,48 @@
 
 Automate::Automate(string chaine){
     lexer = new Lexer(chaine);
-    stateStack.push(*(new State0));
+    stateStack.push_back(new State0);
+}
+
+
+Automate::~Automate(){
+    delete(lexer);
+    while(!stateStack.empty()){
+        delete(stateStack.back());
+        stateStack.pop_back();
+    }
+    while(!symboleStack.empty()){
+        delete(symboleStack.back());
+        symboleStack.pop_back();
+    }
+}
+
+void Automate::run(){
+    bool state = true;
+    while(state){
+        Symbole *s = lexer->Consulter();
+        lexer->Avancer();
+        stateStack.back()->transition(*this,s);
+    }
 }
 
 void Automate::decalage(Symbole * s, State * state){
-    stateStack.push(*state);
-    symboleStack.push(s);
-
+    stateStack.push_back(state);
+    symboleStack.push_back(s);
+    // if its a terminal symbol, then move forward
+    if (s->isTerminal()){
+        lexer->Avancer();
+    }
 }
 
 
 void Automate::reduction(int n, Symbole * s){
+    for (int i=0; i<n; i++){
+        delete(stateStack.back());
+        stateStack.pop_back();
 
+    }
+    stateStack.back()->transition(*this, s);
 }
 
 

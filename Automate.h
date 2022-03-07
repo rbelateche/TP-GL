@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include <stack>
+#include <vector>
 #include "symbole.h"
 #include "state.h"
 #include "lexer.h"
@@ -11,15 +11,17 @@ class Automate {
 
 
     private: 
-        stack<State> stateStack;
-        stack<Symbole*> symboleStack;
+        vector<State*> stateStack;
+        vector<Symbole*> symboleStack;
         Lexer * lexer;
 
     public:
         Automate(string chaine);
         virtual ~Automate();
+        void run();
         void decalage(Symbole * s, State * state);
         void reduction(int n, Symbole * s);
+        
 
 
 };

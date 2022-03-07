@@ -12,6 +12,7 @@ class Symbole {
       Symbole(int i) : ident(i) {  }
       virtual ~Symbole() { }
       operator int() const { return ident; }
+      bool isTerminal();
       virtual void Affiche();
 
    protected:
