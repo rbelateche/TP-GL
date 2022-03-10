@@ -1,4 +1,5 @@
 #include "Automate.h"
+#include "State.h"
 #include <iostream>
 #include <stack>
 

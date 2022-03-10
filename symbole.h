@@ -14,6 +14,7 @@ class Symbole {
       operator int() const { return ident; }
       bool isTerminal();
       virtual void Affiche();
+      
 
    protected:
       int ident;

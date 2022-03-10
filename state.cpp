@@ -1,12 +1,13 @@
 #include "state.h"
 #include "Automate.h"
+#include "symbole.h"
 #include <iostream>
 
 State::State(const string &name) {
     this->name = name;
 }
 
-State::~State() {}
+State::~State() = default;
 
 void State::showTransition(){
     cout << "current state : " << this->name << endl;
@@ -15,6 +16,7 @@ void State::showTransition(){
 
 State0::State0() : State("E0") {};
 
+State0::~State0() = default;
 
 bool State0::transition(Automate & automate, Symbole * s){
     
@@ -41,6 +43,8 @@ bool State0::transition(Automate & automate, Symbole * s){
 
 State1::State1() : State("E1") {};
 
+State1::~State1() = default;
+
 bool State1::transition(Automate & automate, Symbole * s){
 
     switch(*s)
@@ -64,6 +68,8 @@ bool State1::transition(Automate & automate, Symbole * s){
 
 State2::State2() : State("E2") {};
 
+State2::~State2() = default;
+
 
 bool State2::transition(Automate & automate, Symbole * s){
     switch(*s)
@@ -86,7 +92,10 @@ bool State2::transition(Automate & automate, Symbole * s){
 }
 
 
+
 State3::State3() : State("E3") {};
+
+State3::~State3() = default;
 
 bool State3::transition(Automate & automate, Symbole * s){
     switch(*s)
@@ -115,6 +124,8 @@ bool State3::transition(Automate & automate, Symbole * s){
 
 State4::State4() : State("E4") {};
 
+State4::~State4() = default;
+
 bool State4::transition(Automate & automate, Symbole * s){
     switch(*s)
     {
@@ -137,6 +148,8 @@ bool State4::transition(Automate & automate, Symbole * s){
 
 
 State5::State5() : State("E5") {};
+
+State5::~State5() = default;
 
 bool State5::transition(Automate & automate, Symbole * s){
     switch(*s)
@@ -161,6 +174,8 @@ bool State5::transition(Automate & automate, Symbole * s){
 
 State6::State6() : State("E6") {};
 
+State6::~State6() = default;
+
 bool State6::transition(Automate & automate, Symbole * s){
 
     switch(*s)
@@ -184,6 +199,8 @@ bool State6::transition(Automate & automate, Symbole * s){
 
 
 State7::State7() : State("E7") {};
+
+State7::~State7() = default;
 
 bool State7::transition(Automate & automate, Symbole * s){
 
@@ -212,6 +229,8 @@ bool State7::transition(Automate & automate, Symbole * s){
 
 State8::State8() : State("E8") {};
 
+State8::~State8() = default;
+
 bool State8::transition(Automate & automate, Symbole * s){
 
     switch(*s)
@@ -238,6 +257,8 @@ bool State8::transition(Automate & automate, Symbole * s){
 
 
 State9::State9() : State("E9") {};
+
+State9::~State9() = default;
 
 bool State9::transition(Automate & automate, Symbole * s){
 

@@ -3,10 +3,9 @@
 #include <string>
 #include <vector>
 #include "symbole.h"
-#include "state.h"
 #include "lexer.h"
 using namespace std;
-
+class State;
 class Automate {
 
 
