@@ -45,10 +45,25 @@ void Automate::reduction(int n, Symbole * s){
     for (int i=0; i<n; i++){
         delete(stateStack.back());
         stateStack.pop_back();
-
     }
     stateStack.back()->transition(*this, s);
 }
 
+
+
+Expr* Automate::popSymbol(){
+    Expr* eval = dynamic_cast<Expr *>(symboleStack.back());
+    symboleStack.pop_back();
+    return eval;
+}
+
+void Automate::pushSymbol(Symbole * s){
+    symboleStack.push_back(s);
+}
+
+void Automate::popAndDestroySymbol(){
+    delete(symboleStack.back());
+    symboleStack.pop_back();
+}
 
 

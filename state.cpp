@@ -101,17 +101,16 @@ bool State3::transition(Automate & automate, Symbole * s){
     switch(*s)
     {
         case PLUS:
-            automate.reduction(1, new Plus);
-            break;
         case MULT:
-            automate.reduction(1, new Mult);
-            break;
-        case CLOSEPAR: // case of $
-            automate.reduction(1, new ClosePar);
-            break;
+        case CLOSEPAR: // case of $   
         case FIN:
-            automate.reduction(1, new Fin);
+        {    
+            Entier *val = (Entier *) automate.popSymbol();
+            automate.reduction(1, new Expr(val->getValeur()));
+            delete(val);
+            automate.pushSymbol(s);
             break;
+        } 
         default:
             delete(s);
             automate.decalage(new Symbole(ERREUR), nullptr);
@@ -207,16 +206,17 @@ bool State7::transition(Automate & automate, Symbole * s){
     switch(*s)
     {
         case PLUS:
-            automate.reduction(1, new Plus);
+        case CLOSEPAR:
+        case FIN:
+        {
+            Expr * s1 = automate.popSymbol();
+            automate.popAndDestroySymbol();
+            Expr * s2 = automate.popSymbol();
+            automate.reduction(3, new Plus(s1, s2));
             break;
+        }     
         case MULT:
             automate.decalage(s, new State5);
-            break;
-        case CLOSEPAR:
-            automate.reduction(1, new ClosePar);
-            break;
-        case FIN:
-            automate.reduction(1, new Fin);
             break;
         default:
             delete(s);
@@ -236,17 +236,16 @@ bool State8::transition(Automate & automate, Symbole * s){
     switch(*s)
     {
         case PLUS:
-            automate.reduction(1, new Plus);
-            break;
         case MULT:
-            automate.reduction(1, new Mult);
-            break;
         case CLOSEPAR:
-            automate.reduction(1, new ClosePar);
-            break;
         case FIN:
-            automate.reduction(1, new Fin);
+        {
+            Expr * s1 = automate.popSymbol();
+            automate.popAndDestroySymbol();
+            Expr * s2 = automate.popSymbol();
+            automate.reduction(3, new Mult(s1, s2));
             break;
+        }
         default:
             delete(s);
             automate.decalage(new Symbole(ERREUR), nullptr);
@@ -265,17 +264,16 @@ bool State9::transition(Automate & automate, Symbole * s){
     switch(*s)
     {
         case PLUS:
-            automate.reduction(1, new Plus);
-            break;
-        case MULT:
-            automate.reduction(1, new Mult);
-            break;
-        case CLOSEPAR:
-            automate.reduction(1, new ClosePar);
-            break;
+        case MULT:       
+        case CLOSEPAR:         
         case FIN:
-            automate.reduction(1, new Fin);
+        {
+            Expr * s1 = automate.popSymbol();
+            automate.popAndDestroySymbol();
+            Expr * s2 = automate.popSymbol();
+            automate.reduction(3, new Mult(s1, s2));
             break;
+        }        
         default:
             delete(s);
             automate.decalage(new Symbole(ERREUR), nullptr);

@@ -20,7 +20,9 @@ class Automate {
         void run();
         void decalage(Symbole * s, State * state);
         void reduction(int n, Symbole * s);
-        
+        Expr * popSymbol();
+        void pushSymbol(Symbole * symbole);
+        void popAndDestroySymbol();
 
 
 };

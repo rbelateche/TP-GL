@@ -19,5 +19,9 @@ int Expr::getValeur(){
    return this->valeur;
 }
 
+int Entier::getValeur(){
+   return this->valeur;
+}
+
 
 

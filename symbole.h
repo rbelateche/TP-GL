@@ -46,18 +46,29 @@ class Expr : public Symbole { // only one expression with one value
       int valeur;
 };
 
-class Plus : public Symbole {
+class Plus : public Expr {
    public: 
-      Plus() : Symbole(PLUS) {}
+      Plus(Expr * expr1, Expr * expr2) : Expr(expr1->getValeur() + expr2->getValeur()) {}
       ~Plus();
       virtual void Affiche();
 };
 
-class Mult : public Symbole {
+class Mult : public Expr {
    public: 
-      Mult() : Symbole(MULT) {}
+      Mult(Expr * expr1, Expr * expr2) : Expr(expr1->getValeur() * expr2->getValeur()) {}
       ~Mult();
       virtual void Affiche();
+};
+
+
+class Entier : public Symbole {
+   public:
+      Entier(int v) : Symbole(INT), valeur(v) { }
+      ~Entier() { }
+      virtual void Affiche();
+      int getValeur();
+   protected:
+      int valeur;
 };
 
 
@@ -76,12 +87,5 @@ class Erreur : public Symbole {
 };
 
 
-class Entier : public Symbole {
-   public:
-      Entier(int v) : Symbole(INT), valeur(v) { }
-      ~Entier() { }
-      virtual void Affiche();
-   protected:
-      int valeur;
-};
+
 
