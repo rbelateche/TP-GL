@@ -51,8 +51,8 @@ void Automate::reduction(int n, Symbole * s){
 
 
 
-Expr* Automate::popSymbol(){
-    Expr* eval = dynamic_cast<Expr *>(symboleStack.back());
+Expr *Automate::popSymbol(){
+    auto eval = dynamic_cast<Expr *>(symboleStack.back());
     symboleStack.pop_back();
     return eval;
 }

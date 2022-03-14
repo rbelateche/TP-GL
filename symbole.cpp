@@ -15,6 +15,10 @@ void Entier::Affiche() {
    cout<<"("<<valeur<<")";
 }
 
+void Expr::Affiche(){
+   cout<<"("<<valeur<<")"; 
+}
+
 int Expr::getValeur(){
    return this->valeur;
 }

@@ -1,6 +1,6 @@
 CC = g++
 COMPFLAGS = -Wall -std=c++11
-OBJ = main.o Automate.o state.o symbole.o lexer.o 
+OBJ = lexer.o symbole.o state.o Automate.o main.o
 
 
 ifdef MAP
@@ -8,8 +8,8 @@ ifdef MAP
 endif
 
 
-analog: $(OBJ)
-	$(CC) -o $@ $(OBJ)
+grammar: $(OBJ)
+	$(CC) -o $(@) $(OBJ)
 
 lexer.o: lexer.cpp
 	$(CC) $(COMPFLAGS) -c $<	

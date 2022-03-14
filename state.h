@@ -12,7 +12,7 @@ class State {
         explicit State(const string &name);
         virtual ~State();
         void showTransition();
-        virtual bool transition(Automate & automate, Symbole * s);
+        virtual bool transition(Automate & automate, Symbole * s) = 0;
         
 
     protected:

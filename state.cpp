@@ -1,6 +1,4 @@
 #include "state.h"
-#include "Automate.h"
-#include "symbole.h"
 #include <iostream>
 
 State::State(const string &name) {

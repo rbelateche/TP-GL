@@ -1,4 +1,6 @@
-#pragma once
+#ifndef AUTOMATE_H
+#define AUTOMATE_H
+
 
 #include <string>
 #include <vector>
@@ -15,8 +17,8 @@ class Automate {
         Lexer * lexer;
 
     public:
-        Automate(string chaine);
-        virtual ~Automate();
+        explicit Automate(string chaine);
+        ~Automate();
         void run();
         void decalage(Symbole * s, State * state);
         void reduction(int n, Symbole * s);
@@ -26,3 +28,5 @@ class Automate {
 
 
 };
+
+#endif
