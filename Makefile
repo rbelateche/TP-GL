@@ -27,4 +27,4 @@ main.o: main.cpp
 	$(CC) $(COMPFLAGS) -c $<
 
 clean:
-	rm *.o run.exe
+	rm *.o grammar

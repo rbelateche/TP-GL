@@ -4,9 +4,10 @@
 
 
 int main(void) {
-   string chaine("1+34*123");
+   string chaine("1+3*3");
    cout << chaine << endl;
    auto *automate = new Automate(chaine);
+   cout << "automate cree" << endl;
    automate->run();
    delete(automate);
    return 0;

@@ -27,8 +27,14 @@ void Automate::run(){
     while(state){
         Symbole *s = lexer->Consulter();
         lexer->Avancer();
-        stateStack.back()->transition(*this,s);
+        cout << "symbole lu";
+        s->Affiche();
+        cout << endl;
+        state = stateStack.back()->transition(*this,s);
     }
+    int resultat = ((Expr*) symboleStack.back())->getValeur();
+    cout << endl;
+    cout << " = " << resultat << endl;
 }
 
 void Automate::decalage(Symbole * s, State * state){
@@ -36,12 +42,19 @@ void Automate::decalage(Symbole * s, State * state){
     symboleStack.push_back(s);
     // if its a terminal symbol, then move forward
     if (s->isTerminal()){
+        cout << "terminal ";
+        s->Affiche();
+        cout << endl;
         lexer->Avancer();
+    } else {
+        cout << "non terminal";
+        cout << endl;
     }
 }
 
 
 void Automate::reduction(int n, Symbole * s){
+
     for (int i=0; i<n; i++){
         delete(stateStack.back());
         stateStack.pop_back();
@@ -52,13 +65,22 @@ void Automate::reduction(int n, Symbole * s){
 
 
 Expr *Automate::popSymbol(){
-    auto eval = dynamic_cast<Expr *>(symboleStack.back());
+    Expr * eval = (Expr *) (symboleStack.back());
+    cout <<"symbole stack : " << endl;
+    symboleStack.back()->Affiche();
+    cout << endl;
+    cout << " value from popSymbol : ";
+    eval->Affiche();
+    cout << endl;
+    cout << "taille de symbole stack : " << symboleStack.size() << endl;
     symboleStack.pop_back();
+    cout << "end popSymbol " << endl;
     return eval;
 }
 
 void Automate::pushSymbol(Symbole * s){
-    symboleStack.push_back(s);
+    //symboleStack.push_back(s);
+    lexer->pushSymbol(s);
 }
 
 void Automate::popAndDestroySymbol(){
