@@ -264,6 +264,9 @@ bool State8::transition(Automate & automate, Symbole * s){
             automate.popAndDestroySymbol();
             Expr * s2 = automate.popSymbol();
             automate.reduction(3, new Mult(s1, s2));
+            delete(s1);
+            delete(s2);
+            automate.pushSymbol(s);
             break;
         }
         default:
@@ -288,10 +291,12 @@ bool State9::transition(Automate & automate, Symbole * s){
         case CLOSEPAR:         
         case FIN:
         {
-            Expr * s1 = automate.popSymbol();
             automate.popAndDestroySymbol();
-            Expr * s2 = automate.popSymbol();
-            automate.reduction(3, new Mult(s1, s2));
+            auto * val = (Entier*) automate.popSymbol();
+            automate.popAndDestroySymbol();
+            automate.reduction(3, new Expr(val->getValeur()));
+            delete(val);
+            automate.pushSymbol(s);
             break;
         }        
         default:

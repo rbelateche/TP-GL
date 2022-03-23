@@ -4,7 +4,7 @@
 
 
 int main(void) {
-   string chaine("1+3*3");
+   string chaine("(1+2*3)*4+1");
    cout << chaine << endl;
    auto *automate = new Automate(chaine);
    cout << "automate cree" << endl;
