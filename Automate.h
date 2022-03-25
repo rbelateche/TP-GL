@@ -19,7 +19,7 @@ class Automate {
     public:
         explicit Automate(string chaine);
         ~Automate();
-        void run();
+        int run();
         void decalage(Symbole * s, State * state);
         void reduction(int n, Symbole * s);
         Expr * popSymbol();

@@ -17,9 +17,9 @@ State0::State0() : State("E0") {};
 State0::~State0() = default;
 
 bool State0::transition(Automate & automate, Symbole * s){
-    cout << "State0 - transition" << endl;
-    s->Affiche();
-    cout << endl;
+    
+    
+    
     switch(*s)
     {
         case INT:
@@ -29,9 +29,6 @@ bool State0::transition(Automate & automate, Symbole * s){
             automate.decalage(s, new State2);
             break;
         case EXPR:
-            cout << "expr state0" << endl;
-            s->Affiche();
-            cout << endl;
             automate.decalage(s, new State1);
             break;
 
@@ -49,20 +46,16 @@ State1::State1() : State("E1") {};
 State1::~State1() = default;
 
 bool State1::transition(Automate & automate, Symbole * s){
-    cout << "State1 - transition" << endl;
-    s->Affiche();
     switch(*s)
     {
         case PLUS:
             automate.decalage(s, new State4);
-            cout << "decalage" << endl;
             break;
         case MULT:
             automate.decalage(s, new State5);
             break;
         case FIN: // case of $
             delete(s);
-            cout << "   voilà!" << endl;
             return false;
         default:
             delete(s);
@@ -78,7 +71,6 @@ State2::~State2() = default;
 
 
 bool State2::transition(Automate & automate, Symbole * s){
-    cout << "State2 - transition" << endl;
     switch(*s)
     {
         case INT:
@@ -105,8 +97,6 @@ State3::State3() : State("E3") {};
 State3::~State3() = default;
 
 bool State3::transition(Automate & automate, Symbole * s){
-    cout << "State3 transition, symbole" << endl;
-    s->Affiche();
     switch(*s)
     {
         case PLUS:
@@ -114,16 +104,12 @@ bool State3::transition(Automate & automate, Symbole * s){
         case CLOSEPAR: // case of $   
         case FIN:
         {    
-            cout << "enter case" << endl;
+           
            
             auto *val = (Entier *) automate.popSymbol();
-           // cout << "valeur : "<<val->getValeur() << endl;
             automate.reduction(1, new Expr(val->getValeur()));
             delete(val);
             automate.pushSymbol(s);
-            cout << "push symbol haha " <<  endl;
-            s->Affiche();
-            cout << endl;
             break;
         } 
         default:
@@ -141,7 +127,6 @@ State4::State4() : State("E4") {};
 State4::~State4() = default;
 
 bool State4::transition(Automate & automate, Symbole * s){
-    cout << "State4 - transition" << endl;
     switch(*s)
     {
         case INT:
@@ -167,7 +152,6 @@ State5::State5() : State("E5") {};
 State5::~State5() = default;
 
 bool State5::transition(Automate & automate, Symbole * s){
-    cout << "State5 - transition" << endl;
     switch(*s)
     {
         case INT:
@@ -193,7 +177,6 @@ State6::State6() : State("E6") {};
 State6::~State6() = default;
 
 bool State6::transition(Automate & automate, Symbole * s){
-    cout << "State6 - transition" << endl;
     switch(*s)
     {
         case PLUS:
@@ -219,7 +202,6 @@ State7::State7() : State("E7") {};
 State7::~State7() = default;
 
 bool State7::transition(Automate & automate, Symbole * s){
-    cout << "State7 - transition" << endl;
     switch(*s)
     {
         case PLUS:
@@ -252,7 +234,6 @@ State8::State8() : State("E8") {};
 State8::~State8() = default;
 
 bool State8::transition(Automate & automate, Symbole * s){
-    cout << "State8 - transition" << endl;
     switch(*s)
     {
         case PLUS:
@@ -283,7 +264,6 @@ State9::State9() : State("E9") {};
 State9::~State9() = default;
 
 bool State9::transition(Automate & automate, Symbole * s){
-    cout << "State9 - transition" << endl;
     switch(*s)
     {
         case PLUS:

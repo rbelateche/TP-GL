@@ -22,19 +22,22 @@ Automate::~Automate(){
     }
 }
 
-void Automate::run(){
+int Automate::run(){
     bool state = true;
     while(state){
         Symbole *s = lexer->Consulter();
-        lexer->Avancer();
-        cout << "symbole lu";
-        s->Affiche();
-        cout << endl;
+        lexer->Avancer();  
         state = stateStack.back()->transition(*this,s);
     }
-    int resultat = ((Expr*) symboleStack.back())->getValeur();
-    cout << endl;
-    cout << " = " << resultat << endl;
+    // on teste si on retrouve une erreur dans la syntaxe 
+    if (*symboleStack.back() == ERREUR){
+        cout << "Erreur dans la syntaxe de l'expression" << endl;
+        return (-1);
+    } else {
+        int resultat = ((Expr*) symboleStack.back())->getValeur();
+        cout << " = " << resultat << endl;
+        return resultat;
+    }
 }
 
 void Automate::decalage(Symbole * s, State * state){
@@ -42,14 +45,9 @@ void Automate::decalage(Symbole * s, State * state){
     symboleStack.push_back(s);
     // if its a terminal symbol, then move forward
     if (s->isTerminal()){
-        cout << "terminal ";
-        s->Affiche();
-        cout << endl;
+        
         lexer->Avancer();
-    } else {
-        cout << "non terminal";
-        cout << endl;
-    }
+    } 
 }
 
 
@@ -63,23 +61,15 @@ void Automate::reduction(int n, Symbole * s){
 }
 
 
-
+// pops the symbol from the symbol stack, as an EXPR, and returns it 
 Expr *Automate::popSymbol(){
     Expr * eval = (Expr *) (symboleStack.back());
-    cout <<"symbole stack : " << endl;
-    symboleStack.back()->Affiche();
-    cout << endl;
-    cout << " value from popSymbol : ";
-    eval->Affiche();
-    cout << endl;
-    cout << "taille de symbole stack : " << symboleStack.size() << endl;
     symboleStack.pop_back();
-    cout << "end popSymbol " << endl;
     return eval;
 }
 
+// pushes 
 void Automate::pushSymbol(Symbole * s){
-    //symboleStack.push_back(s);
     lexer->pushSymbol(s);
 }
 
